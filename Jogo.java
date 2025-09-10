@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Jogo {
+public class Jogo extends Conteudo {
     String titulo;
     String plataforma;
     LocalDate dataLancamento;

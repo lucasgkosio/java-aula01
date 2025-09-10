@@ -1,57 +1,45 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 public class Main {
     public static void main(String[] args) {
-        var jogos = new ArrayList<Jogo>();
+        var catalogo = new ArrayList<Conteudo>();
+        var scan = new Scanner(System.in);
+        var JogoService = new JogoService();
+
 
         while (true) {
             System.out.println("""
-                    Bem vindo ao sistema de gerenciamento de jogos!
-                    Digite a opção desejada:
-                    1 - Cadastrar novo jogo
-                    2 - Listar jogos cadastrados
-                    3 - Remover jogo
-                    4 - Sair
+                    Bem vindo ao sistema de gerenciamento de mídias!
+                    Digite o conteudo que deseja gerenciar:
+                    1- Jogos
+                    2- Filmes
+                    3- Series
                     """);
-            var scan = new Scanner(System.in);
-            var opcao = scan.nextInt();
-            scan.nextLine();
+            var conteudoOpcao = scan.nextInt();
+            if (conteudoOpcao == 1) {
+                System.out.println("----------------------------------------------");
+                System.out.println("""
+                        Digite a opção desejada:
+                        1 - Cadastrar novo jogo
+                        2 - Listar jogos cadastrados
+                        3 - Remover jogo
+                        4 - Sair
+                        """);
 
-            if (opcao == 1) {
-                System.out.println("Digite o nome do jogo que deseja cadastrar:");
-                var titulo = scan.nextLine();
-                System.out.println("Digite a plataforma do jogo: ");
-                var plataforma = scan.nextLine();
-                System.out.println("Digite a data de lançamento do jogo (YYYY-MM-DD): ");
-                var dataLancamento = scan.nextLine();
+                var opcao = scan.nextInt();
+                scan.nextLine();
 
-                var jogo = new Jogo();
-                jogo.titulo = titulo;
-                jogo.plataforma = plataforma;
-                jogo.dataLancamento = LocalDate.parse(dataLancamento);
-
-                jogos.add(jogo);
-                System.out.println("Jogo " + jogo.titulo + " cadastrado com sucesso!");
-            } else if (opcao == 2) {
-                System.out.println("Listando jogos cadastrados: ");
-                var index = 1;
-                for(var jogo : jogos) {
-                    System.out.println(index + " - " + jogo);
-                    index++;
+                switch (opcao) {
+                    case 1 -> JogoService.AdicionarJogo(scan, catalogo);
+                    case 2 -> JogoService.ListarJogos(catalogo);
+                    case 3 -> JogoService.RemoverJogo(scan, catalogo);
+                    case 4 -> System.exit(0);
+                    default -> System.out.println("Opção inválida!");
                 }
             }
-            else if (opcao == 3){
-                System.out.println("Digite o número do jogo que deseja remover:");
-                var numJogo = scan.nextInt();
-                scan.nextLine();
-                jogos.remove(numJogo-1);
-            }
-            else if (opcao == 4)
-                System.exit(0);
-            else
-                System.out.println("Opção inválida!");
         }
     }
 }
