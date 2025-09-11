@@ -1,8 +1,20 @@
+package services;
+
+import entities.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JogoService {
+
+    public final String MENU_JOGOS = """
+                        Digite a opção desejada:
+                        1 - Cadastrar novo jogo
+                        2 - Listar jogos cadastrados
+                        3 - Remover jogo
+                        4 - Voltar
+                        """;
     public void AdicionarJogo(Scanner scan, ArrayList<Conteudo> catalogo) {
         System.out.println("Digite o conteudo que deseja gerenciar:");
         var titulo = scan.nextLine();
@@ -17,7 +29,7 @@ public class JogoService {
         jogo.dataLancamento = LocalDate.parse(dataLancamento);
 
         catalogo.add(jogo);
-        System.out.println("Jogo " + jogo.titulo + " cadastrado com sucesso!");
+        System.out.println("entities.Jogo " + jogo.titulo + " cadastrado com sucesso!");
     }
 
     public void ListarJogos(ArrayList<Conteudo> catalogo) {

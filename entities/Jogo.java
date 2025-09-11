@@ -1,13 +1,15 @@
+package entities;
+
 import java.time.LocalDate;
 
 public class Jogo extends Conteudo {
-    String titulo;
-    String plataforma;
-    LocalDate dataLancamento;
+    public String titulo;
+    public String plataforma;
+    public LocalDate dataLancamento;
 
     @Override
     public String toString() {
-        return "Jogo{" +
+        return "entities.Jogo{" +
                 "titulo='" + titulo + '\'' +
                 ", plataforma='" + plataforma + '\'' +
                 ", dataLancamento=" + dataLancamento +
